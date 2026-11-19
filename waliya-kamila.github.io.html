@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waliya Kamila Portfolio</title>
+<meta name="description" content="Waliya Kamila: machine learning and software engineering. Order-book forecasting research, edge-AI radar gesture recognition, and full-stack RAG applications.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a research notebook. Narrow reading column, numbers set in mono like lab readings, one cobalt accent for links and results. */
+:root {
+  --paper: #f5f6f3;
+  --surface: #ffffff;
+  --ink: #17202a;
+  --muted: #5b6672;
+  --rule: #dde1e3;
+  --accent: #2547c4;
+  --accent-soft: #e6ebfa;
+  --font-display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #11161c;
+    --surface: #171e26;
+    --ink: #e8ecef;
+    --muted: #9aa5b1;
+    --rule: #2a333d;
+    --accent: #8ea6ff;
+    --accent-soft: #1f2a4a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #11161c;
+  --surface: #171e26;
+  --ink: #e8ecef;
+  --muted: #9aa5b1;
+  --rule: #2a333d;
+  --accent: #8ea6ff;
+  --accent-soft: #1f2a4a;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+header.hero { padding: 64px 0 32px; border-bottom: 1px solid var(--rule); }
+.kicker { font-family: var(--font-mono); font-size: 13px; color: var(--muted); letter-spacing: 0.02em; margin: 0 0 12px; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(44px, 8vw, 72px); line-height: 1.02; margin: 0 0 16px; text-wrap: balance; }
+.lede { font-size: 19px; max-width: 62ch; margin: 0 0 24px; color: var(--ink); }
+.links { display: flex; flex-wrap: wrap; gap: 10px 18px; font-size: 15px; margin: 0; padding: 0; list-style: none; }
+.links li { display: flex; gap: 6px; align-items: baseline; }
+.links .lbl { font-family: var(--font-mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+.readings { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; margin: 32px 0 0; }
+.reading { background: var(--surface); padding: 16px; }
+.reading .num { font-family: var(--font-mono); font-size: 24px; font-weight: 500; font-variant-numeric: tabular-nums; color: var(--accent); }
+.reading .what { font-size: 13px; color: var(--muted); line-height: 1.4; }
+
+section { padding: 48px 0 8px; }
+h2 { font-family: var(--font-mono); font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 0 0 20px; }
+
+.entry { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 24px; margin: 0 0 20px; }
+.entry.lead { border-left: 3px solid var(--accent); }
+.entry-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; align-items: baseline; }
+h3 { font-family: var(--font-display); font-weight: 400; font-size: 28px; line-height: 1.15; margin: 0; text-wrap: balance; }
+.when { font-family: var(--font-mono); font-size: 13px; color: var(--muted); white-space: nowrap; }
+.where { color: var(--muted); font-size: 15px; margin: 4px 0 12px; }
+.entry p { margin: 0 0 12px; max-width: 68ch; }
+.entry ul { margin: 0 0 14px; padding-left: 20px; max-width: 68ch; }
+.entry li { margin: 0 0 6px; }
+.stack { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 14px; padding: 0; list-style: none; }
+.stack li { font-family: var(--font-mono); font-size: 12px; background: var(--accent-soft); color: var(--ink); padding: 3px 8px; border-radius: 4px; margin: 0; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { display: inline-block; font-size: 14px; font-weight: 500; padding: 7px 14px; border-radius: 6px; border: 1px solid var(--accent); text-decoration: none; }
+.btn.primary { background: var(--accent); color: var(--surface); }
+.btn:hover { text-decoration: none; filter: brightness(1.08); }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.plain { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 20px 24px; }
+.plain h4 { margin: 0 0 6px; font-size: 16px; font-weight: 600; }
+.plain p { margin: 0; color: var(--muted); font-size: 15px; }
+dl.skills { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; margin: 0; }
+dl.skills dt { font-family: var(--font-mono); font-size: 13px; color: var(--muted); padding-top: 2px; }
+dl.skills dd { margin: 0; }
+
+footer { padding: 48px 0 64px; color: var(--muted); font-size: 14px; }
+footer .wrap { border-top: 1px solid var(--rule); padding-top: 24px; }
+
+@media (max-width: 680px) {
+  .readings { grid-template-columns: repeat(2, 1fr); }
+  .two { grid-template-columns: 1fr; }
+  dl.skills { grid-template-columns: 1fr; gap: 2px; }
+  dl.skills dd { margin-bottom: 10px; }
+  header.hero { padding-top: 40px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">ML research · Edge AI · Full-stack · New Delhi</p>
+    <h1>Waliya Kamila</h1>
+    <p class="lede">Third-year B.E. student in Electronics and Communication Engineering (AI) at IGDTUW. I build machine learning systems and test them honestly: on unseen users, on held-out data, and on hardware as small as a microcontroller.</p>
+    <ul class="links">
+      <li><span class="lbl">Email</span> <a href="mailto:waliyasyed44@gmail.com">waliyasyed44@gmail.com</a></li>
+      <li><span class="lbl">GitHub</span> <a href="https://github.com/waliya-kamila">github.com/waliya-kamila</a></li>
+      <li><span class="lbl">LinkedIn</span> <a href="https://www.linkedin.com/in/waliya">linkedin.com/in/waliya</a></li>
+      <li><span class="lbl">Phone</span> <span class="mono">+91 8448206136</span></li>
+    </ul>
+
+    <div class="readings" aria-label="Key results">
+      <div class="reading"><div class="num">0.609</div><div class="what">macro-F1 on 38,298 held-out order-book sequences</div></div>
+      <div class="reading"><div class="num">89.6%</div><div class="what">macro-F1 on unseen users, radar gestures</div></div>
+      <div class="reading"><div class="num">30 KB</div><div class="what">INT8 model running in 22.9 ms on a Cortex-M7</div></div>
+      <div class="reading"><div class="num">Semi-final</div><div class="what">Flipkart GRiD 8.0, national level, Sep 2026</div></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="research">
+  <div class="wrap">
+    <h2>Research</h2>
+    <article class="entry lead">
+      <div class="entry-head">
+        <h3>Order-flow forecasting from limit order books</h3>
+        <span class="when">Jun – Sep 2026</span>
+      </div>
+      <p class="where">Research Intern, AI/ML · IGDTUW, under Prof. Abhishek Gaur</p>
+      <ul>
+        <li>Designed a hybrid CNN + bidirectional GRU + temporal-attention model in PyTorch that predicts mid-price direction (up, stationary, down) at five horizons at once.</li>
+        <li>Trained on the FI-2010 benchmark (144 features, 100-event windows). Reached <span class="mono">0.609</span> macro-F1 on <span class="mono">38,298</span> held-out test sequences, with <span class="mono">63.4%</span> accuracy at 1 step and <span class="mono">64.8%</span> at 10 steps.</li>
+        <li>Built the full pipeline independently and shipped a public research dashboard with a forecast explorer, attention visualisation and performance lab. A paper on the results is in draft.</li>
+      </ul>
+      <ul class="stack"><li>PyTorch</li><li>Time series</li><li>Attention</li><li>Streamlit</li></ul>
+      <div class="actions">
+        <a class="btn primary" href="https://lob-intelligence-dashboard-b8uf7vy3uc3tw68dshucl5.streamlit.app/">Live dashboard</a>
+        <a class="btn" href="https://github.com/waliya-kamila/LOB-Intelligence-dashboard">Code on GitHub</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <article class="entry">
+      <div class="entry-head">
+        <h3>Privacy-safe radar gesture recognition on microcontrollers</h3>
+        <span class="when">2026</span>
+      </div>
+      <ul>
+        <li>Recognises 12 hand gestures from 3 UWB radars at <span class="mono">89.6%</span> macro-F1 on users the model never saw (leave-one-subject-out, 8 participants). Published 97–99% results on this dataset use random splits that leak the same person into training and test.</li>
+        <li>Causal, streaming pre-processing (clutter removal, Hilbert envelope) shrank the input <span class="mono">5.9×</span> and lifted a random-forest baseline from <span class="mono">70.6</span> to <span class="mono">89.9</span> macro-F1.</li>
+        <li>Quantized a 24K-parameter CNN to a <span class="mono">30 KB</span> INT8 model (0.3-point loss), benchmarked on 6 STM32 boards: <span class="mono">22.9 ms</span> on a Cortex-M7.</li>
+        <li>Privacy audit: an attacker identifies users with <span class="mono">98.7%</span> accuracy from raw radar, but only <span class="mono">13.4%</span> (chance 12.8%) from on-device labels.</li>
+      </ul>
+      <ul class="stack"><li>TensorFlow Lite</li><li>INT8 quantization</li><li>STM32</li><li>Signal processing</li></ul>
+      <div class="actions">
+        <a class="btn primary" href="https://huggingface.co/spaces/Waliyaaaa/radar-gesture-edge-ai">Live demo</a>
+        <a class="btn" href="https://github.com/waliya-kamila/Radar-Gesture-Edge-AI">Code on GitHub</a>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <h3>PDF Genius: retrieval-augmented document assistant</h3>
+      </div>
+      <ul>
+        <li>Full-stack app where users upload PDFs, ask questions and get answers cited to the source passages.</li>
+        <li>Document chunks embedded with Gemini (768 dimensions) and indexed in Pinecone for cosine-similarity retrieval.</li>
+        <li>Google OAuth sign-in through NextAuth.js, with per-user upload, viewing and deletion of documents.</li>
+      </ul>
+      <ul class="stack"><li>Next.js</li><li>React</li><li>TypeScript</li><li>Gemini API</li><li>Pinecone</li><li>Tailwind CSS</li></ul>
+      <div class="actions">
+        <a class="btn" href="https://github.com/waliya-kamila/PDF-Genius---AI-Powered-PDF-Assistant">Code on GitHub</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <h2>Experience and achievements</h2>
+    <div class="two">
+      <div class="plain">
+        <h4>Software Engineer Intern, Anveshan Foundation</h4>
+        <p><span class="mono">Jun – Sep 2025</span> · Built full-stack MERN applications end to end, owning the React frontend, Node.js/Express REST APIs, MongoDB data models and authentication.</p>
+      </div>
+      <div class="plain">
+        <h4>National Semi-Finalist, Flipkart GRiD 8.0</h4>
+        <p><span class="mono">Sep 2026</span> · Flipkart's national engineering challenge for engineering students.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <dl class="skills">
+      <dt>Languages</dt><dd>Python, TypeScript, JavaScript, HTML/CSS</dd>
+      <dt>Machine learning</dt><dd>PyTorch, TensorFlow Lite, NumPy, Pandas, CNNs, GRUs, attention, time-series classification, RAG</dd>
+      <dt>Edge AI</dt><dd>INT8 quantization, STM32 / ST Edge AI, signal processing, Gradio</dd>
+      <dt>Web</dt><dd>React, Next.js, Node.js, Express, MongoDB, REST APIs, NextAuth.js (Google OAuth), Tailwind CSS</dd>
+      <dt>Fundamentals</dt><dd>Data structures and algorithms, OOP, DBMS, computer networks, probability and statistics</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <h2>Education</h2>
+    <div class="plain">
+      <h4>B.E. Electronics and Communication Engineering (Artificial Intelligence)</h4>
+      <p>Indira Gandhi Delhi Technical University for Women, New Delhi · <span class="mono">2024 – 2028</span></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    Open to ML and software engineering internships for 2027. Reach me at <a href="mailto:waliyasyed44@gmail.com">waliyasyed44@gmail.com</a>.
+  </div>
+</footer>
+
+</body>
+</html>
